@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     <!-- Redirect to actual React app -->
     <script>
       setTimeout(() => {
-        window.location.href = '/#/backend/web/web-page-builder/website/${id}';
+        window.location.href = '/website/${id}';
       }, 100);
     </script>
   </head>
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
     <meta name="description" content="Custom landing page for website ${id}" />
     <meta property="og:title" content="Website ${id} - WebPage Builder" />
     <meta property="og:description" content="Custom landing page for website ${id}" />
-    <script>window.location.href = '/#/backend/web/web-page-builder/website/${id}';</script>
+    <script>window.location.href = '/website/${id}';</script>
   </head>
 </html>
     `;
