@@ -107,32 +107,7 @@ const Website = () => {
       </Helmet>
 
       {/* Debug Info - Remove in production */}
-     {import.meta.env.MODE === 'development' && (
-  <Box 
-    sx={{ 
-      position: 'fixed', 
-      top: 0, 
-      left: 0, 
-      background: 'rgba(0,0,0,0.8)', 
-      color: 'white', 
-      padding: '10px', 
-      fontSize: '12px',
-      zIndex: 9999,
-      maxWidth: '300px',
-      borderRadius: '0 0 8px 0'
-    }}
-  >
-    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-      Meta Debug:
-    </Typography>
-    <Typography variant="caption" sx={{ display: 'block' }}>
-      Title: {meta.title}
-    </Typography>
-    <Typography variant="caption" sx={{ display: 'block' }}>
-      Desc: {meta.description.substring(0, 50)}...
-    </Typography>
-  </Box>
-)}
+ 
       <h1>{meta?.title}</h1>
       <h2>{meta?.description} </h2>
       <h3>{meta.keywords}</h3>
