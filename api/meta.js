@@ -14,9 +14,11 @@ export default async function handler(req, res) {
       }
     );
     
-    const hobbyData = apiResponse.data[0]; // Get first hobby
+    const hobbyData = apiResponse.data; // Get first hobby
+    console.log('hobbyData:', hobbyData)
     const hobbyName = hobbyData?.hobby || 'Web Development';
     const hobbyLink = hobbyData?.link || 'https://example.com';
+    console.log('hobbyLink:', hobbyLink)
     
     // Create dynamic meta tags based on the hobby
     const dynamicTitle = `${hobbyName} - `;
