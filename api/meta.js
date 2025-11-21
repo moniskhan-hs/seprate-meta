@@ -48,12 +48,7 @@ export default async function handler(req, res) {
     <meta name="twitter:description" content="${dynamicDescription}" />
     <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/handydash-75858.appspot.com/o/website-builder%2Fmy-website%2Fimages%2F1759749172888?alt=media&token=d9717e34-6158-4031-8e8b-5106da63fb6e" />
     
-    <!-- Redirect to actual React app -->
-    // <script>
-    //   setTimeout(() => {
-    //     window.location.href = '/website/${id}';
-    //   }, 100);
-    // </script>
+ 
   </head>
   <body>
     <div>Loading ${hobbyName} page...</div>
