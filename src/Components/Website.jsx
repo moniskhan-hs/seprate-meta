@@ -44,33 +44,6 @@ const Website = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const updateMetaTags = () => {
-      document.title = meta.title;
-      
-      // Update description
-      let descMeta = document.querySelector('meta[name="description"]');
-      if (!descMeta) {
-        descMeta = document.createElement('meta');
-        descMeta.name = 'description';
-        document.head.appendChild(descMeta);
-      }
-      descMeta.content = meta.description;
-      
-      // Update Open Graph tags
-      ['og:title', 'og:description', 'og:image', 'og:url'].forEach(property => {
-        let metaTag = document.querySelector(`meta[property="${property}"]`);
-        if (!metaTag) {
-          metaTag = document.createElement('meta');
-          metaTag.setAttribute('property', property);
-          document.head.appendChild(metaTag);
-        }
-        metaTag.content = meta[property.replace('og:', '')] || meta.title || meta.description;
-      });
-    };
-    
-    updateMetaTags();
-  }, [meta]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -82,32 +55,7 @@ const Website = () => {
 
   return (
     <>
-    {/* Meta Tags with @dr.pogodin/react-helmet */}
-      <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <meta name="keywords" content={meta.keywords} />
-        
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={meta.url} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:image" content={meta.image} />
-        <meta property="og:site_name" content="WebPage Builder" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
-        
-        {/* Canonical */}
-        <link rel="canonical" href={meta.url} />
-      </Helmet>
 
-      {/* Debug Info - Remove in production */}
- 
       <h1>{meta?.title}</h1>
       <h2>{meta?.description} </h2>
       <h3>{meta.keywords}</h3>
