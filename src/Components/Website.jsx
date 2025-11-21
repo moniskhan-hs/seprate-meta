@@ -45,6 +45,34 @@ const Website = () => {
   }, []);
 
   useEffect(() => {
+    const updateMetaTags = () => {
+      document.title = meta.title;
+      
+      // Update description
+      let descMeta = document.querySelector('meta[name="description"]');
+      if (!descMeta) {
+        descMeta = document.createElement('meta');
+        descMeta.name = 'description';
+        document.head.appendChild(descMeta);
+      }
+      descMeta.content = meta.description;
+      
+      // Update Open Graph tags
+      ['og:title', 'og:description', 'og:image', 'og:url'].forEach(property => {
+        let metaTag = document.querySelector(`meta[property="${property}"]`);
+        if (!metaTag) {
+          metaTag = document.createElement('meta');
+          metaTag.setAttribute('property', property);
+          document.head.appendChild(metaTag);
+        }
+        metaTag.content = meta[property.replace('og:', '')] || meta.title || meta.description;
+      });
+    };
+    
+    updateMetaTags();
+  }, [meta]);
+
+  useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMeta((prev) => ({
       ...prev,
@@ -54,48 +82,57 @@ const Website = () => {
 
   return (
     <>
-    <Helmet>
-  {/* Basic Meta Tags */}
-  <title>{meta.title}</title>
-  <meta name="description" content={meta.description} />
-  <meta name="keywords" content={meta.keywords} />
-  <link rel="canonical" href={meta.url} />
-  
-  {/* Open Graph Meta Tags (Facebook, LinkedIn, etc.) */}
-  <meta property="og:title" content={meta.title} />
-  <meta property="og:description" content={meta.description} />
-  <meta property="og:image" content={meta.image} />
-  <meta property="og:url" content={meta.url} />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="WebPage Builder" />
-  
-  {/* Twitter Meta Tags */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={meta.title} />
-  <meta name="twitter:description" content={meta.description} />
-  <meta name="twitter:image" content={meta.image} />
-  <meta name="twitter:site" content="@yourhandle" />
-  
-  {/* Additional Meta Tags */}
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content={meta?.title || "WebPage Builder"} />
-  
-  {/* Structured Data for SEO */}
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": meta.title,
-      "description": meta.description,
-      "url": meta.url,
-      "image": meta.image,
-      "publisher": {
-        "@type": "Organization",
-        "name": "WebPage Builder"
-      }
-    })}
-  </script>
-</Helmet>
+    {/* Meta Tags with @dr.pogodin/react-helmet */}
+      <Helmet>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta name="keywords" content={meta.keywords} />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={meta.url} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
+        <meta property="og:image" content={meta.image} />
+        <meta property="og:site_name" content="WebPage Builder" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content={meta.image} />
+        
+        {/* Canonical */}
+        <link rel="canonical" href={meta.url} />
+      </Helmet>
+
+      {/* Debug Info - Remove in production */}
+     {import.meta.env.MODE === 'development' && (
+  <Box 
+    sx={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      background: 'rgba(0,0,0,0.8)', 
+      color: 'white', 
+      padding: '10px', 
+      fontSize: '12px',
+      zIndex: 9999,
+      maxWidth: '300px',
+      borderRadius: '0 0 8px 0'
+    }}
+  >
+    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+      Meta Debug:
+    </Typography>
+    <Typography variant="caption" sx={{ display: 'block' }}>
+      Title: {meta.title}
+    </Typography>
+    <Typography variant="caption" sx={{ display: 'block' }}>
+      Desc: {meta.description.substring(0, 50)}...
+    </Typography>
+  </Box>
+)}
       <h1>{meta?.title}</h1>
       <h2>{meta?.description} </h2>
       <h3>{meta.keywords}</h3>
