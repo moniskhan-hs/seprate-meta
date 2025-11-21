@@ -96,7 +96,9 @@ const Website = () => {
     })}
   </script>
 </Helmet>
-      <h1>Website page {id}</h1>
+      <h1>{meta?.title}</h1>
+      <h2>{meta?.description} </h2>
+      <h3>{meta.keywords}</h3>
     </>
   );
 };
