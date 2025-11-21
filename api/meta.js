@@ -19,8 +19,8 @@ export default async function handler(req, res) {
     const hobbyLink = hobbyData?.link || 'https://example.com';
     
     // Create dynamic meta tags based on the hobby
-    const dynamicTitle = `${hobbyName} - WebPage Builder`;
-    const dynamicDescription = `Discover amazing ${hobbyName} resources and create your perfect landing page with WebPage Builder`;
+    const dynamicTitle = `${hobbyName} - `;
+    const dynamicDescription = ` ${hobbyName} `;
     
     const html = `
 <!DOCTYPE html>
@@ -32,11 +32,11 @@ export default async function handler(req, res) {
     <!-- Dynamic Meta Tags -->
     <title>${dynamicTitle}</title>
     <meta name="description" content="${dynamicDescription}" />
-    <meta name="keywords" content="${hobbyName}, landing page, website builder" />
+    <meta name="keywords" content="${hobbyName}" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="WebPage Builder" />
+    <meta property="og:site_name" content="${dynamicTitle}" />
     <meta property="og:title" content="${dynamicTitle}" />
     <meta property="og:description" content="${dynamicDescription}" />
     <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/handydash-75858.appspot.com/o/website-builder%2Fmy-website%2Fimages%2F1759749172888?alt=media&token=d9717e34-6158-4031-8e8b-5106da63fb6e" />
